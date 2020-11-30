@@ -35,7 +35,7 @@ jobs:
         name: Increment ${{ env.solution }} version to ${{ steps.calculate-solution-version.outputs.solutionVersion }}
         uses: microsoft/powerplatform-actions/update-solution-version@b24403b
         with:
-          patch-version: ${{ steps.calculate-solution-version.outputs.solutionVersion }}
+          patch-version: "${{ steps.calculate-solution-version.outputs.solutionVersion }}"
 
       - id: export-managed-solution
         name: Export ${{ env.solution }} as Managed
