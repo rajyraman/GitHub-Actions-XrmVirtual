@@ -105,6 +105,7 @@ jobs:
       - id: apply-solution-upgrade
         if: steps.check-solution-exists.outputs.isHolding == 'true' && env.solutionType == 'Managed'
         name: Applying Solution Upgrade for ${{ env.solution }}
+        uses: microsoft/powerplatform-actions/upgrade-solution@b24403b
         with:
           environment-url: ${{ env.environmentUrl }}
           user-name: ${{ env.userName }}
