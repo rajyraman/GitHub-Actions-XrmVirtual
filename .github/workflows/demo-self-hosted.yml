@@ -1,0 +1,24 @@
+name: demo-self-hosted
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [self-hosted, windows, x64]
+    env:
+      environmentUrl: https://dreamingincrm.crm6.dynamics.com
+      userName: "actionsuser@dreamingincrm.onmicrosoft.com"
+      applicationId: "e605bea5-f749-4f51-8508-8c6891d9f8dc"
+      solution: "GitHubActionsDemo"
+      timeZone: "AUS Eastern Standard Time"
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: who-am-i
+        name: Connecting to ${{ env.environmentUrl }} as ${{ env.userName }}
+        uses: microsoft/powerplatform-actions/who-am-i@v0.1.8
+        with:
+          environment-url: ${{ env.environmentUrl }}
+          user-name: ${{ env.userName }}
+          password-secret: ${{ secrets.password }}
