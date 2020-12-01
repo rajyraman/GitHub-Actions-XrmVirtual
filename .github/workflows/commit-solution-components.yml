@@ -28,7 +28,6 @@ jobs:
         name: Bump ${{ env.solution }} version to ${{ github.run_number }}
         uses: microsoft/powerplatform-actions/update-solution-version@b24403b
         with:
-          patch-version: ${{ github.run_number }}
           strategy: solution
           
       - id: solution-version
