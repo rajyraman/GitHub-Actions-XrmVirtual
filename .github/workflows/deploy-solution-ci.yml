@@ -28,14 +28,6 @@ jobs:
           user-name: ${{ env.userName }}
           password-secret: ${{ secrets.password }}
 
-      - id: publish-solution
-        name: Publish ${{ env.solution }}
-        uses: microsoft/powerplatform-actions/publish-solution@b24403b
-        with:
-          environment-url: ${{ env.environmentUrl }}
-          user-name: ${{ env.userName }}
-          password-secret: ${{ secrets.password }}
-
       - id: pack-solution
         name: Build ${{ env.solution }} as Managed Solution
         uses: microsoft/powerplatform-actions/pack-solution@v0.1.8
