@@ -73,6 +73,7 @@ jobs:
         name: Set Branch Name variable
         run: |
           echo "::set-output name=branchName::${{ env.solution }}_${{ steps.calculate-solution-version.outputs.solutionVersion }}"
+          git tag ${{ steps.calculate-solution-version.outputs.solutionVersion }}
 
       - id: create-solution-branch
         name: Create ${{ steps.branch-name.outputs.branchName }} branch
