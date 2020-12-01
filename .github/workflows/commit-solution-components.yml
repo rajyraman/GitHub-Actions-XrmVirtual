@@ -30,12 +30,13 @@ jobs:
         run: |
           $version = "$([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), '${{ env.timeZone }}').ToString("yyyy.MM.dd")).${{ github.run_number }}";
           echo "::set-output name=solutionVersion::$version"
-
+          git tag ${{ steps.calculate-solution-version.outputs.solutionVersion }}
+          
       - id: increment-solution-version
         name: Increment ${{ env.solution }} version to ${{ steps.calculate-solution-version.outputs.solutionVersion }}
         uses: microsoft/powerplatform-actions/update-solution-version@b24403b
         with:
-          patch-version: "${{ steps.calculate-solution-version.outputs.solutionVersion }}"
+          strategy: gittags
 
       - id: export-managed-solution
         name: Export ${{ env.solution }} as Managed
@@ -73,7 +74,6 @@ jobs:
         name: Set Branch Name variable
         run: |
           echo "::set-output name=branchName::${{ env.solution }}_${{ steps.calculate-solution-version.outputs.solutionVersion }}"
-          git tag ${{ steps.calculate-solution-version.outputs.solutionVersion }}
 
       - id: create-solution-branch
         name: Create ${{ steps.branch-name.outputs.branchName }} branch
