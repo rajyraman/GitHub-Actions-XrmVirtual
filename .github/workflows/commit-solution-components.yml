@@ -24,20 +24,7 @@ jobs:
           environment-url: ${{ env.environmentUrl }}
           user-name: ${{ env.userName }}
           password-secret: ${{ secrets.password }}
-        
-      - id: increment-solution-version
-        name: Bump ${{ env.solution }} version to ${{ github.run_number }}
-        uses: microsoft/powerplatform-actions/update-solution-version@b24403b
-        with:
-          patch-version: "${{ github.run_number }}"
-          
-      - id: solution-version
-        name: Getting version information for ${{ env.solution }}
-        uses: mavrosxristoforos/get-xml-info@1.0
-        with:
-          xml-file: "Solutions/${{ env.solution }}/src/Other/Solution.xml"
-          xpath: "//ImportExportXml/SolutionManifest/Version"
-          
+                
       - id: export-managed-solution
         name: Export ${{ env.solution }} as Managed
         uses: microsoft/powerplatform-actions/export-solution@v0.1.8
@@ -69,7 +56,20 @@ jobs:
           solution-folder: "Solutions/${{ env.solution }}/src"
           solution-type: "Both"
           overwrite-files: true
-
+          
+      - id: increment-solution-version
+        name: Bump ${{ env.solution }} version to ${{ github.run_number }}
+        uses: microsoft/powerplatform-actions/update-solution-version@b24403b
+        with:
+          patch-version: "${{ github.run_number }}"
+          
+      - id: solution-version
+        name: Getting version information for ${{ env.solution }}
+        uses: mavrosxristoforos/get-xml-info@1.0
+        with:
+          xml-file: "Solutions/${{ env.solution }}/src/Other/Solution.xml"
+          xpath: "//ImportExportXml/SolutionManifest/Version"
+          
       - id: branch-name
         name: Set Branch Name variable
         run: |
