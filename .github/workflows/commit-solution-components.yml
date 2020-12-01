@@ -13,6 +13,7 @@ jobs:
       applicationId: "e605bea5-f749-4f51-8508-8c6891d9f8dc"
       solution: "GitHubActionsDemo"
       timeZone: "AUS Eastern Standard Time"
+      PacCli.PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
 
@@ -28,7 +29,7 @@ jobs:
         name: Bump ${{ env.solution }} version to ${{ github.run_number }}
         uses: microsoft/powerplatform-actions/update-solution-version@b24403b
         with:
-          strategy: solution
+          strategy: gittags
           
       - id: solution-version
         name: Getting version information for ${{ env.solution }}
