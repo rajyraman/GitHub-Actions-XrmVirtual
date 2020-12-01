@@ -29,6 +29,7 @@ jobs:
         uses: microsoft/powerplatform-actions/update-solution-version@b24403b
         with:
           patch-version: ${{ github.run_number }}
+          strategy: solution
           
       - id: solution-version
         name: Getting version information for ${{ env.solution }}
