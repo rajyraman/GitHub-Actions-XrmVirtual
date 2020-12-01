@@ -24,7 +24,15 @@ jobs:
           environment-url: ${{ env.environmentUrl }}
           user-name: ${{ env.userName }}
           password-secret: ${{ secrets.password }}
-                
+
+      - id: publish-solution
+        name: Publish ${{ env.solution }}
+        uses: microsoft/powerplatform-actions/publish-solution@b24403b
+        with:
+          environment-url: ${{ env.environmentUrl }}
+          user-name: ${{ env.userName }}
+          password-secret: ${{ secrets.password }}
+                          
       - id: export-managed-solution
         name: Export ${{ env.solution }} as Managed
         uses: microsoft/powerplatform-actions/export-solution@v0.1.8
